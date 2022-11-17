@@ -1,0 +1,23 @@
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <ng-container *ngFor="let listColumn of listColumns">
+          <th >{{listColumn.label}} </th>
+        </ng-container>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let listRow of listRows; let index=index">
+        <td>{{listRow.firstname}} {{listRow.lastname}}</td>
+        <td>{{listRow.age}}</td>
+        <td>{{listRow.balance}}</td>
+        <td>
+          <a href="#" [routerLink]="['/post/', listRow.account_number, 'view']" class="btn btn-secondary">View</a>
+          <a href="#" [routerLink]="['/post/', listRow.account_number, 'edit']" class="btn btn-warning">Edit</a>
+          <button type="button" class="btn btn-danger">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  
