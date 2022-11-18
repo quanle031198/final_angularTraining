@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
 
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,6 +17,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class HomeComponent implements OnInit {
   @ViewChild('paginator') paginator!: MatPaginator;
+
   pagination = {
     page: 0,
     size: 5,
@@ -23,11 +25,6 @@ export class HomeComponent implements OnInit {
   }
   
   dataSource!: MatTableDataSource<Account>;
-  // dataSource: MatTableDataSource<PeriodicElement>;
-  // ngAfterViewInit() {
-  //   this.dataSource = new MatTableDataSource(ELEMENT_DATA);
-  //   this.dataSource.paginator =this.paginator;
-  // }
 
   account: Account[] = [];
 
@@ -66,7 +63,8 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllAccount();
+    this.getAllAccount();   
+       
   }
 
   loadDataToLocal(): void {
@@ -78,7 +76,7 @@ export class HomeComponent implements OnInit {
     this.accountService.getAccounts(createParamSearch({
       last_name: this.searchStr,
       start: 0,
-      limit: 500,
+      limit:800,
     }))
       .pipe(takeUntil(this.unSubscribeAll))
       .subscribe((resp: Account[]) => {
@@ -157,8 +155,11 @@ export class HomeComponent implements OnInit {
     this.getAllAccount();
   }
   changePage(e: any){
-    console.log(e);
     this.pagination.page = e.pageIndex;
     this.pagination.size = e.pageSize;
+  }
+
+  deleteAccount($e: any){
+    this.getAllAccount();  
   }
 }

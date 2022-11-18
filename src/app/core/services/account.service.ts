@@ -11,6 +11,9 @@ export class AccountService {
   constructor(private http: HttpClient) {
   }
 
+  // getAccounts(): Observable<any> {
+  //   return this.http.get<Account[]>('/accounts');
+  // }
   getAccounts(param: ParamSearch): Observable<any> {
     let params = new HttpParams();
     params = params.append('limit', param.limit.toString());

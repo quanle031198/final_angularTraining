@@ -1,5 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Account } from 'src/app/core/model/account.model';
+import { AccountService } from 'src/app/core/services/account.service';
+import { EditComponent } from '../../pages/edit/edit.component';
+import { ViewComponent } from '../../pages/view/view.component';
+
 
 @Component({
   selector: 'app-my-datatable',
@@ -19,9 +24,48 @@ export class MyDatatableComponent implements OnInit {
     }
 
   ]
-  constructor() { }
+
+  @Output() deleteAccEvent = new EventEmitter<any>();
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private accountService: AccountService, 
+    private dialog: MatDialog 
+    
+    ) { }
 
   ngOnInit(): void {
+    // console.log(this.data);
+    
   }
 
+  FunctionView(code: any) {
+    this.OpenView('1000ms','600ms',code)
+  }
+
+  OpenView(enteranimation: any, exitanimation: any,code:any) {
+    console.log(code);
+    
+    this.dialog.open(ViewComponent,{
+      data:{
+        name: 'austin'
+      }
+    })
+  }
+
+  FunctionEdit(code: any) {
+    this.OpenDialog('1000ms','600ms',code)
+  }
+
+  OpenDialog(enteranimation: any, exitanimation: any,code:any) {
+
+    this.dialog.open(EditComponent)
+  }
+
+  deleteAcc(id:any){
+    this.accountService.deleteAccount(id).subscribe((res) => {      
+          this.deleteAccEvent.emit(res);
+          
+    })
+  }
 }

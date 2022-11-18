@@ -3,7 +3,7 @@
   <br>
   <div class="row">
     <div class="col-6">
-      <a href="#" routerLink="/post/create/" class="btn btn-success">Thêm mới</a>
+      <a href="#" routerLink="/home/create/" class="btn btn-success">Thêm mới</a>
     </div>
     <div class="col-6">
       <div class="search">
@@ -16,9 +16,10 @@
   
   <app-my-datatable 
   [listColumns]="txtLable" 
-  [listRows]="account | slice : pagination.page * pagination.size : (pagination.page + 1)*pagination.size">
+  [listRows]="account | slice : pagination.page * pagination.size : (pagination.page + 1)*pagination.size"
+  (deleteAccEvent)="deleteAccount($event)"
+  >
   </app-my-datatable>
-  <ng-template #abc></ng-template>
 
   <mat-paginator 
   [pageSizeOptions]="[5,15,25]"

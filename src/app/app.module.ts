@@ -23,7 +23,7 @@ import { MyDatatableComponent } from './components/partials/my-datatable/my-data
 import { CreatComponent } from './components/pages/creat/creat.component';
 import { EditComponent } from './components/pages/edit/edit.component';
 import { ViewComponent } from './components/pages/view/view.component';
-// import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -34,7 +34,8 @@ import { ViewComponent } from './components/pages/view/view.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule,
     // FontAwesomeModule,  
   ],
   declarations: [AppComponent, HomeComponent, MyDatatableComponent, CreatComponent, EditComponent, ViewComponent],
