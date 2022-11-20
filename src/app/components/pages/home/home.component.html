@@ -3,11 +3,12 @@
   <br>
   <div class="row">
     <div class="col-6">
-      <a href="#" routerLink="/home/create/" class="btn btn-success">Thêm mới</a>
+      <!-- <a href="#" routerLink="/home/create/" class="btn btn-success">Thêm mới</a> -->
+      <button (click)="openAddPopup()" type="button" class="btn btn-success">Add new</button>
     </div>
     <div class="col-6">
       <div class="search">
-        <span>Tìm kiếm</span>
+        <span>Search</span>
         <input type="text" [(ngModel)]="searchStr" (ngModelChange)="search()">
         
       </div>

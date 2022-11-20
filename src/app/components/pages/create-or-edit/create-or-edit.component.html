@@ -1,0 +1,144 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h2>Account</h2>
+        </div>
+    </div>
+</div>
+<form [formGroup]="ReactiveForm" (ngSubmit)="SaveAccount()">
+    <div mat-dialog-content>
+        <div class="container">
+            <div class="row">
+                <div class="col-5">
+                    <mat-form-field>
+                        <mat-label>First name *</mat-label>
+                        <input placeholder="First name" matInput formControlName="firstname">
+                    </mat-form-field>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.firstname.touched || submitted) && accountFormControl.firstname.errors?.required">
+                        First Name is required
+                    </span>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.firstname.touched || submitted) && accountFormControl.firstname.errors?.pattern">
+                        No special characters
+                    </span>
+                </div>
+                <div class="col-5">
+                    <mat-form-field>
+                        <mat-label>Last name *</mat-label>
+                        <input placeholder="Last name" matInput formControlName="lastname">
+                    </mat-form-field>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.lastname.touched || submitted) && accountFormControl.lastname.errors?.required">
+                        Last Name is required
+                    </span>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.lastname.touched || submitted) && accountFormControl.lastname.errors?.pattern">
+                        No special characters
+                    </span>
+                </div>
+                <div class="col-2">
+                    <mat-form-field>
+                        <mat-label>Age *</mat-label>
+                        <input type="number" placeholder="Age" matInput formControlName="age">
+                    </mat-form-field>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.age.touched || submitted) && accountFormControl.age.errors?.required">
+                        Age is required
+                    </span>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.age.touched || submitted) && accountFormControl.age.errors?.pattern">
+                        Age 1 to 100 and no special characters
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-5">
+                    <mat-form-field>
+                        <mat-label>Email *</mat-label>
+                        <input placeholder="Email" matInput formControlName="email">
+                    </mat-form-field>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.email.touched || submitted) && accountFormControl.email.errors?.required">
+                        Email is required
+                    </span>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.email.touched || submitted) && accountFormControl.email.errors?.pattern">
+                        Incorrect format
+                    </span>
+                </div>
+                <div class="col-3">
+                    <mat-form-field>
+                        <mat-label>Employer *</mat-label>
+                        <input placeholder="Employer" matInput formControlName="employer">
+                    </mat-form-field>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.employer.touched || submitted) && accountFormControl.employer.errors?.required">
+                        Employer is required
+                    </span>
+                </div>
+                <div class="col-2">
+                    <mat-form-field>
+                        <mat-label>Balance *</mat-label>
+                        <input type="number" placeholder="Balance" matInput formControlName="balance">
+                    </mat-form-field>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.balance.touched || submitted) && accountFormControl.balance.errors?.required">
+                        Balance is required
+                    </span>
+                </div>
+                <div class="col-2">
+                    <mat-form-field>
+                        <mat-label>Gender *</mat-label>
+                        <input placeholder="Gender" matInput formControlName="gender">
+                    </mat-form-field>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.gender.touched || submitted) && accountFormControl.gender.errors?.required">
+                        Gender is required
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field>
+                        <mat-label>Address *</mat-label>
+                        <input placeholder="Address" matInput formControlName="address">
+                    </mat-form-field>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.address.touched || submitted) && accountFormControl.address.errors?.required">
+                        Address is required
+                    </span>
+                </div>
+                <div class="col-3">
+                    <mat-form-field>
+                        <mat-label>City *</mat-label>
+                        <input placeholder="City" matInput formControlName="city">
+                    </mat-form-field>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.city.touched || submitted) && accountFormControl.city.errors?.required">
+                        City is required
+                    </span>
+                </div>
+                <div class="col-3">
+                    <mat-form-field>
+                        <mat-label>State *</mat-label>
+                        <input placeholder="State" matInput formControlName="state">
+                    </mat-form-field>
+                    <span class="text-danger"
+                        *ngIf="(accountFormControl.state.touched || submitted) && accountFormControl.state.errors?.required">
+                        State is required
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div mat-dialog-action>
+            <div class="row">
+                <div class="col-6 mt-3">
+                    <button mat-raised-button class="btn btn-danger me-3" mat-dialog-close>Close</button>
+                    <button type="submit" mat-raised-button class="btn btn-primary" cdkFocusInitial>Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

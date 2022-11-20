@@ -28,28 +28,22 @@ export class MyDatatableComponent implements OnInit {
   @Output() deleteAccEvent = new EventEmitter<any>();
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
     private accountService: AccountService, 
     private dialog: MatDialog 
-    
     ) { }
 
-  ngOnInit(): void {
-    // console.log(this.data);
-    
+  ngOnInit(): void {    
   }
 
   FunctionView(code: any) {
     this.OpenView('1000ms','600ms',code)
   }
 
-  OpenView(enteranimation: any, exitanimation: any,code:any) {
-    console.log(code);
-    
+  OpenView(enteranimation:any, exitanimation:any,code:any) {    
     this.dialog.open(ViewComponent,{
-      data:{
-        name: 'austin'
-      }
+      data:[]=[
+         code
+      ]
     })
   }
 

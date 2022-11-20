@@ -1,15 +1,18 @@
-<div>
+<div class="view-viewPage">
     <ul>
-        <li>Id: </li>
-        <li>Account Number: </li>
-        <li>Name: </li>
-        <li>Balance: </li>
-        <li>Age: </li>
-        <li>Gender: </li>
-        <li>Address: </li>
-        <li>Employer: </li>
-        <li>Email: </li>
-        <li>City: </li>
-        <li>State: </li>
+        <ng-container *ngFor="let d of data">
+            <li> Id:{{d._id}} </li>
+            <li>Account Number: {{d.account_number}} </li>
+            <li>Name: {{d.firstname}} {{d.lastname}}</li>
+            <li>Balance: {{d.balance}}</li>
+            <li>Age: {{d.age}}</li>
+            <li>Gender: {{d.gender}}</li>
+            <li>Address: {{d.address}}</li>
+            <li>Employer: {{d.employer}}</li>
+            <li>Email: {{d.email}}</li>
+            <li>City: {{d.city}}</li>
+            <li>State: {{d.state}}</li>
+        </ng-container>
+        
     </ul>
 </div>

@@ -9,9 +9,9 @@ import { ViewComponent } from './components/pages/view/view.component';
 const routes: Routes = [
   {path: '',pathMatch: 'full', redirectTo:'home'},
   {path: 'home', component:  HomeComponent},
-  { path: 'home/create', component: CreatComponent },
-  { path: 'home/:accId/view', component: ViewComponent },
-  { path: 'home/:accId/edit', component: EditComponent } 
+  // { path: 'home/create', component: CreatComponent },
+  // { path: 'home/:accId/view', component: ViewComponent },
+  // { path: 'home/:accId/edit', component: EditComponent } 
 
 
 ];

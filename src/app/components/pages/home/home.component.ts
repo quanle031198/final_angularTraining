@@ -7,6 +7,8 @@ import { Accounts } from 'src/app/core/data/account';
 import * as faker from 'faker';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateOrEditComponent } from '../create-or-edit/create-or-edit.component';
 
 
 
@@ -44,7 +46,7 @@ export class HomeComponent implements OnInit {
 
   },
   {
-    label: 'Thao tác',
+    label: 'Action',
     width: '100px'
 
   }
@@ -56,7 +58,7 @@ export class HomeComponent implements OnInit {
   selectedAccount: Account | undefined;
   searchStr = '';
 
-  constructor(private accountService: AccountService) {
+  constructor(private dialog: MatDialog, private accountService: AccountService) {
     // read data from file to localstorage
     this.unSubscribeAll = new Subject<any>();
     this.loadDataToLocal();
@@ -91,14 +93,14 @@ export class HomeComponent implements OnInit {
       
   }
 
-  openAddAccount(): void {
-    this.isOpenAddAccount = true;
-  }
+  // openAddAccount(): void {
+  //   this.isOpenAddAccount = true;
+  // }
 
-  openEdit(acc: Account): void {
-    this.selectedAccount = acc;
-    this.isOpenEditAccount = true;
-  }
+  // openEdit(acc: Account): void {
+  //   this.selectedAccount = acc;
+  //   this.isOpenEditAccount = true;
+  // }
 
   saveEdit(): void {
     const editedAccount = createAccount({
@@ -126,30 +128,30 @@ export class HomeComponent implements OnInit {
       });
   }
 
-  saveNew(): void {
-    const newAccount = createAccount({
-      balance: parseInt(faker.finance.amount(0, 99999), 0),
-      age: 25,
-      lastname: faker.name.lastName(),
-      firstname: faker.name.lastName(),
-      city: faker.address.city(),
-      account_number: faker.finance.account(),
-      address: faker.address.streetAddress(),
-      email: faker.internet.email(),
-      employer: faker.name.lastName(),
-      gender: 'F',
-      state: faker.address.stateAbbr()
-    });
+  // saveNew(): void {
+  //   const newAccount = createAccount({
+  //     balance: parseInt(faker.finance.amount(0, 99999), 0),
+  //     age: 25,
+  //     lastname: faker.name.lastName(),
+  //     firstname: faker.name.lastName(),
+  //     city: faker.address.city(),
+  //     account_number: faker.finance.account(),
+  //     address: faker.address.streetAddress(),
+  //     email: faker.internet.email(),
+  //     employer: faker.name.lastName(),
+  //     gender: 'F',
+  //     state: faker.address.stateAbbr()
+  //   });
 
-    this.accountService.addAccount(newAccount)
-      .pipe(takeUntil(this.unSubscribeAll))
-      .subscribe((resp: Account[]) => {
-        this.getAllAccount();
-        this.isOpenAddAccount = false;
-      }, (err: Error) => {
-        this.account = [];
-      });
-  }
+  //   this.accountService.addAccount(newAccount)
+  //     .pipe(takeUntil(this.unSubscribeAll))
+  //     .subscribe((resp: Account[]) => {
+  //       this.getAllAccount();
+  //       this.isOpenAddAccount = false;
+  //     }, (err: Error) => {
+  //       this.account = [];
+  //     });
+  // }
 
   search(): void {
     this.getAllAccount();
@@ -158,8 +160,13 @@ export class HomeComponent implements OnInit {
     this.pagination.page = e.pageIndex;
     this.pagination.size = e.pageSize;
   }
-
   deleteAccount($e: any){
     this.getAllAccount();  
+  }
+
+  openAddPopup(){
+    this.dialog.open(CreateOrEditComponent,{
+      width: "50%"
+    })
   }
 }

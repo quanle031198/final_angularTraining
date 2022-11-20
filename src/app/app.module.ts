@@ -24,6 +24,8 @@ import { CreatComponent } from './components/pages/creat/creat.component';
 import { EditComponent } from './components/pages/edit/edit.component';
 import { ViewComponent } from './components/pages/view/view.component';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CreateOrEditComponent } from './components/pages/create-or-edit/create-or-edit.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   imports: [
@@ -36,9 +38,16 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
     MatPaginatorModule,
     MatTableModule,
     MatDialogModule,
-    // FontAwesomeModule,  
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, HomeComponent, MyDatatableComponent, CreatComponent, EditComponent, ViewComponent],
+  declarations: [AppComponent, HomeComponent, MyDatatableComponent, CreatComponent, EditComponent, ViewComponent, CreateOrEditComponent],
+  entryComponents: [
+    ViewComponent
+  ],
   bootstrap: [AppComponent],
   providers: [
     // provider used to create fake backend,
