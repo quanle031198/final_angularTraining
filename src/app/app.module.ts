@@ -41,7 +41,6 @@ import { ToastrModule } from 'ngx-toastr';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
   declarations: [AppComponent, HomeComponent, MyDatatableComponent, CreatComponent, EditComponent, ViewComponent, CreateOrEditComponent],

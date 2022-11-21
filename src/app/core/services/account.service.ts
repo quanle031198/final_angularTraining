@@ -1,12 +1,16 @@
 import {HttpBackend, HttpClient, HttpParams} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {map, filter, catchError} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {map, filter, catchError, tap} from 'rxjs/operators';
+import {Observable, Subject} from 'rxjs';
 import {Account, ParamSearch} from '../model/account.model';
 
 @Injectable()
 export class AccountService {
   // tslint:disable-next-line:variable-name
+  private _refreshRequired = new Subject<void>();
+  get requiredRefresh(){
+    return this._refreshRequired;
+  }
 
   constructor(private http: HttpClient) {
   }
@@ -29,7 +33,11 @@ export class AccountService {
   }
 
   addAccount(acc: Account): Observable<any> {
-    return this.http.post('/accounts', acc);
+    return this.http.post('/accounts', acc).pipe(
+      tap(() => {
+        this._refreshRequired.next()
+      })
+    );
   }
 
   editAccount(acc: Account): Observable<any> {

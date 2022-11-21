@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateOrEditComponent } from '../create-or-edit/create-or-edit.component';
+declare let alertify: any;
 
 
 
@@ -66,7 +67,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllAccount();   
-       
+    this.accountService.requiredRefresh.subscribe(r=>{
+      this.getAllAccount()
+    })
   }
 
   loadDataToLocal(): void {
@@ -161,7 +164,13 @@ export class HomeComponent implements OnInit {
     this.pagination.size = e.pageSize;
   }
   deleteAccount($e: any){
-    this.getAllAccount();  
+    alertify.confirm("Remove Account", "Are you sure ?",()=>{
+      this.getAllAccount(); 
+      alertify.success('Delete successfully !'); 
+    },function(){
+
+    })
+
   }
 
   openAddPopup(){

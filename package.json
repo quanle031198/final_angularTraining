@@ -31,7 +31,7 @@
     "bootstrap": "^5.2.2",
     "faker": "^5.1.0",
     "jquery": "^3.6.1",
-    "ngx-toastr": "^16.0.1",
+    "ngx-toastr": "^11.1.2",
     "rxjs": "~6.6.0",
     "save": "^2.9.0",
     "tslib": "^2.0.0",

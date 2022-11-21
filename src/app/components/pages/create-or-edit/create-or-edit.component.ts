@@ -6,8 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Account, createParamSearch } from 'src/app/core/model/account.model';
 import { AccountService } from 'src/app/core/services/account.service';
-import * as alertify from 'alertifyjs'
-import { NotificationService } from 'src/app/core/services/notification.service';
+declare let alertify: any;
 
 @Component({
   selector: 'app-create-or-edit',
@@ -17,22 +16,17 @@ import { NotificationService } from 'src/app/core/services/notification.service'
 export class CreateOrEditComponent implements OnInit {
 
   submitted = false;
-  unSubscribeAll!: Subject<any>;
-  isOpenAddAccount = false;
+  respData: any;
   account: Account[] = [];
   acc:any
-  // @Output() addAccEvent = new EventEmitter<any>();
 
   constructor(
-    public notifyService : NotificationService, 
     private accountService: AccountService,
     public dialogRef: MatDialogRef<CreateOrEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Account,
     ) { }
   dataSource!: MatTableDataSource<Account>;
 
-  searchStr = '';
-  newAccount:any[] = [];
 
   ngOnInit(): void {
   }
@@ -72,50 +66,20 @@ export class CreateOrEditComponent implements OnInit {
     return this.ReactiveForm.controls;
   }
 
-  // SaveAccount(){
-  //   this.submitted = true;
-  //   if(this.ReactiveForm.valid){
-  //     this.acc = this.ReactiveForm.value      
-  //     // this.addAccEvent.emit(this.ReactiveForm.value)
-  //   }else{
-      
-  //   }
-  // }
-
-  
-
   SaveAccount() {
+
     const newAccount = this.ReactiveForm.getRawValue()
     // this.submitted = true;
-  if(newAccount){
+  if(this.ReactiveForm.valid){
     this.accountService.addAccount(newAccount)
     .subscribe((resp) => {
-      console.log(resp.result);
-      
-      if(resp.result == 'pass'){
         alertify.success('Add successfully !');
-      }
+        this.dialogRef.close();
     });
   }else{
-    // this.notifyService.showError("Something is wrong", "error")
-    // alertify.error('Check valid !');
+    alertify.error('Check valid !');
   }
 
 }
 
-  // SaveAccount(): void {
-  //   this.submitted = true;
-  //   if(this.ReactiveForm.valid){
-  //   const newAccount = this.ReactiveForm.value;
-
-  //   this.accountService.addAccount(newAccount)
-  //     .pipe(takeUntil(this.unSubscribeAll))
-  //     .subscribe((resp: Account[]) => {
-  //       // this.getAllAccount();
-  //       this.isOpenAddAccount = false;
-  //     }, (err: Error) => {
-  //       this.account = [];
-  //     });
-  //   }
-  // }
 }
