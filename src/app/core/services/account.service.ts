@@ -15,9 +15,7 @@ export class AccountService {
   constructor(private http: HttpClient) {
   }
 
-  // getAccounts(): Observable<any> {
-  //   return this.http.get<Account[]>('/accounts');
-  // }
+
   getAccounts(param: ParamSearch): Observable<any> {
     let params = new HttpParams();
     params = params.append('limit', param.limit.toString());
@@ -40,11 +38,12 @@ export class AccountService {
     );
   }
 
-  editAccount(acc: Account): Observable<any> {
-    return this.http.put('/accounts/' + acc._id, acc);
+  editAccount(acc: Account,id:any): Observable<any> {
+    return this.http.put('/accounts/' + id, acc);
   }
 
   deleteAccount(acc: Account): Observable<any> {
     return this.http.delete('/accounts/' + acc._id);
   }
+
 }

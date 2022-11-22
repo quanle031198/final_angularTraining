@@ -1,3 +1,4 @@
+
 <table class="table table-striped">
     <thead>
       <tr>
@@ -12,10 +13,9 @@
         <td>{{listRow.age}}</td>
         <td>{{listRow.balance}}</td>
         <td>
-          <!-- <a href="#" [routerLink]="['/home/', listRow._id, 'view']" class="btn btn-secondary">View</a> -->
-          <!-- <a href="#" [routerLink]="['/home/', listRow._id, 'edit']" class="btn btn-warning">Edit</a> -->
+         
           <button (click)="FunctionView(listRow)" class="btn btn-secondary">View</button>
-          <button (click)="FunctionEdit(listRow._id)" class="btn btn-warning">Edit</button>
+          <button (click)="FunctionEdit(listRow)" class="btn btn-warning">Edit</button>
           <button type="button" (click)="deleteAcc(listRow)" class="btn btn-danger">Delete</button>
         </td>
       </tr>

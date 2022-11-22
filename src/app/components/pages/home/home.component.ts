@@ -105,31 +105,31 @@ export class HomeComponent implements OnInit {
   //   this.isOpenEditAccount = true;
   // }
 
-  saveEdit(): void {
-    const editedAccount = createAccount({
-      balance: parseInt(faker.finance.amount(0, 99999), 0),
-      age: 25,
-      lastname: faker.name.lastName(),
-      firstname: faker.name.lastName(),
-      city: this.selectedAccount?.city,
-      account_number: this.selectedAccount?.account_number,
-      address: this.selectedAccount?.address,
-      email: this.selectedAccount?.email,
-      employer: this.selectedAccount?.employer,
-      gender: 'F',
-      state: this.selectedAccount?.state,
-      _id: this.selectedAccount?._id
-    });
+  // saveEdit(): void {
+  //   const editedAccount = createAccount({
+  //     balance: parseInt(faker.finance.amount(0, 99999), 0),
+  //     age: 25,
+  //     lastname: faker.name.lastName(),
+  //     firstname: faker.name.lastName(),
+  //     city: this.selectedAccount?.city,
+  //     account_number: this.selectedAccount?.account_number,
+  //     address: this.selectedAccount?.address,
+  //     email: this.selectedAccount?.email,
+  //     employer: this.selectedAccount?.employer,
+  //     gender: 'F',
+  //     state: this.selectedAccount?.state,
+  //     _id: this.selectedAccount?._id
+  //   });
 
-    this.accountService.editAccount(editedAccount)
-      .pipe(takeUntil(this.unSubscribeAll))
-      .subscribe((resp: Account[]) => {
-        this.getAllAccount();
-        this.isOpenEditAccount = false;
-      }, (err: Error) => {
-        this.account = [];
-      });
-  }
+  //   this.accountService.editAccount(editedAccount)
+  //     .pipe(takeUntil(this.unSubscribeAll))
+  //     .subscribe((resp: Account[]) => {
+  //       this.getAllAccount();
+  //       this.isOpenEditAccount = false;
+  //     }, (err: Error) => {
+  //       this.account = [];
+  //     });
+  // }
 
   // saveNew(): void {
   //   const newAccount = createAccount({
@@ -173,9 +173,12 @@ export class HomeComponent implements OnInit {
 
   }
 
-  openAddPopup(){
+  openAddPopup(code:any){
     this.dialog.open(CreateOrEditComponent,{
-      width: "50%"
+      width: "50%",
+      data:{
+        accCode:code
+      }
     })
   }
 }

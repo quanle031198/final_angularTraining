@@ -2,6 +2,7 @@ import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Account } from 'src/app/core/model/account.model';
 import { AccountService } from 'src/app/core/services/account.service';
+import { CreateOrEditComponent } from '../../pages/create-or-edit/create-or-edit.component';
 import { EditComponent } from '../../pages/edit/edit.component';
 import { ViewComponent } from '../../pages/view/view.component';
 
@@ -36,10 +37,10 @@ export class MyDatatableComponent implements OnInit {
   }
 
   FunctionView(code: any) {
-    this.OpenView('1000ms','600ms',code)
+    this.OpenView(code)
   }
 
-  OpenView(enteranimation:any, exitanimation:any,code:any) {    
+  OpenView(code:any) {    
     this.dialog.open(ViewComponent,{
       data:[]=[
          code
@@ -48,18 +49,27 @@ export class MyDatatableComponent implements OnInit {
   }
 
   FunctionEdit(code: any) {
-    this.OpenDialog('1000ms','600ms',code)
+    this.OpenDialog(code)
   }
 
-  OpenDialog(enteranimation: any, exitanimation: any,code:any) {
+  OpenDialog(code:any) {
 
-    this.dialog.open(EditComponent)
+    this.dialog.open(CreateOrEditComponent, {
+      width: "50%",
+      data:{
+        accCode:code
+      }
+    })
   }
 
   deleteAcc(id:any){
-    this.accountService.deleteAccount(id).subscribe((res) => {      
+    this.accountService.deleteAccount(id).subscribe((res) => { 
+      console.log(res);
+           
           this.deleteAccEvent.emit(res);
           
     })
   }
+
+  
 }
