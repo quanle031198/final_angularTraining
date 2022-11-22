@@ -2,12 +2,11 @@
   <h1>Angular Final Test </h1>
   <br>
   <div class="row">
-    <div class="col-6">
-      <!-- <a href="#" routerLink="/home/create/" class="btn btn-success">Thêm mới</a> -->
+    <div class="col-xl-6 col-lg-6 col-sm-12 mt-3">
       <button (click)="openAddPopup('')" type="button" class="btn btn-success">Add new</button>
     </div>
-    <div class="col-6">
-      <div class="search">
+    <div class="col-xl-6 col-lg-6 col-sm-12 mt-3">
+      <div class="search float-lg-end float-sm-start">
         <span>Search</span>
         <input type="text" [(ngModel)]="searchStr" (ngModelChange)="search()">
         
