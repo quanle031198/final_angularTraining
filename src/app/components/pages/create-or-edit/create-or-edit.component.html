@@ -91,7 +91,11 @@
                 <div class="col-2">
                     <mat-form-field>
                         <mat-label>Gender *</mat-label>
-                        <input placeholder="Gender" matInput formControlName="gender">
+                        <mat-select formControlName="gender" placeholder="Gender">
+                            <mat-option value="F">Female</mat-option>
+                            <mat-option value="M">Male</mat-option>
+                        </mat-select>
+                        <!-- <input placeholder="Gender" matInput formControlName="gender"> -->
                     </mat-form-field>
                     <span class="text-danger"
                         *ngIf="(accountFormControl.gender.touched || submitted) && accountFormControl.gender.errors?.required">

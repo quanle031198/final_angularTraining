@@ -3,7 +3,6 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Account } from 'src/app/core/model/account.model';
 import { AccountService } from 'src/app/core/services/account.service';
 import { CreateOrEditComponent } from '../../pages/create-or-edit/create-or-edit.component';
-import { EditComponent } from '../../pages/edit/edit.component';
 import { ViewComponent } from '../../pages/view/view.component';
 
 
@@ -42,9 +41,9 @@ export class MyDatatableComponent implements OnInit {
 
   OpenView(code:any) {    
     this.dialog.open(ViewComponent,{
-      data:[]=[
-         code
-      ]
+      data:{
+         vidata:code
+      }
     })
   }
 

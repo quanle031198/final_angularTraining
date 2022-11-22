@@ -1,17 +1,17 @@
 <div class="view-viewPage">
     <ul>
-        <ng-container *ngFor="let d of data">
-            <li> Id:{{d._id}} </li>
-            <li>Account Number: {{d.account_number}} </li>
-            <li>Name: {{d.firstname}} {{d.lastname}}</li>
-            <li>Balance: {{d.balance}}</li>
-            <li>Age: {{d.age}}</li>
-            <li>Gender: {{d.gender}}</li>
-            <li>Address: {{d.address}}</li>
-            <li>Employer: {{d.employer}}</li>
-            <li>Email: {{d.email}}</li>
-            <li>City: {{d.city}}</li>
-            <li>State: {{d.state}}</li>
+        <ng-container >
+            <li> Id:{{viewData._id}} </li>
+            <li>Account Number: {{viewData.account_number}} </li>
+            <li>Name: {{viewData.firstname}} {{viewData.lastname}}</li>
+            <li>Balance: {{viewData.balance}}</li>
+            <li>Age: {{viewData.age}}</li>
+            <li>Gender: {{male}}</li>
+            <li>Address: {{viewData.address}}</li>
+            <li>Employer: {{viewData.employer}}</li>
+            <li>Email: {{viewData.email}}</li>
+            <li>City: {{viewData.city}}</li>
+            <li>State: {{viewData.state}}</li>
         </ng-container>
         
     </ul>

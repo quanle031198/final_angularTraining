@@ -20,12 +20,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyDatatableComponent } from './components/partials/my-datatable/my-datatable.component';
-import { CreatComponent } from './components/pages/creat/creat.component';
-import { EditComponent } from './components/pages/edit/edit.component';
 import { ViewComponent } from './components/pages/view/view.component';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CreateOrEditComponent } from './components/pages/create-or-edit/create-or-edit.component';
 import { ToastrModule } from 'ngx-toastr';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   imports: [
@@ -40,10 +38,11 @@ import { ToastrModule } from 'ngx-toastr';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
     MatButtonModule,
     ToastrModule.forRoot()
   ],
-  declarations: [AppComponent, HomeComponent, MyDatatableComponent, CreatComponent, EditComponent, ViewComponent, CreateOrEditComponent],
+  declarations: [AppComponent, HomeComponent, MyDatatableComponent, ViewComponent, CreateOrEditComponent],
   entryComponents: [
     ViewComponent
   ],
