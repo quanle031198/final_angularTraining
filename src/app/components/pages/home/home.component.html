@@ -3,7 +3,7 @@
   <br>
   <div class="row">
     <div class="col-xl-6 col-lg-6 col-sm-12 mt-3">
-      <button (click)="openAddPopup('')" type="button" class="btn btn-success">Add new</button>
+      <button (click)="openDialog('')" type="button" class="btn btn-success">Add new</button>
     </div>
     <div class="col-xl-6 col-lg-6 col-sm-12 mt-3">
       <div class="search float-lg-end float-sm-start">
@@ -18,11 +18,14 @@
   [listColumns]="txtLable" 
   [listRows]="account | slice : pagination.page * pagination.size : (pagination.page + 1)*pagination.size"
   (deleteAccEvent)="deleteAccount($event)"
+  (editAccEvent)="editAccount($event)"
+  (viewAccEvent)="viewAccount($event)"
+
   >
   </app-my-datatable>
 
   <mat-paginator 
-  [pageSizeOptions]="[5,15,25]"
+  [pageSizeOptions]="[25]"
   [length]="pagination.total"
   (page)="changePage($event)"
   aria-label="select page"></mat-paginator>

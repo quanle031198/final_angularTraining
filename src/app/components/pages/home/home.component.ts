@@ -9,6 +9,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateOrEditComponent } from '../create-or-edit/create-or-edit.component';
+import { ViewComponent } from '../view/view.component';
 declare let alertify: any;
 
 
@@ -23,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   pagination = {
     page: 0,
-    size: 5,
+    size: 25,
     total: 0
   }
   
@@ -36,14 +37,15 @@ export class HomeComponent implements OnInit {
     label: 'Name',
     width: '100px'
   },
-  {
-    label: 'Age',
-    width: '150px'
-
-  },
+  
   {
     label: 'Balance',
     width: '140px'
+
+  },
+  {
+    label: 'Age',
+    width: '150px'
 
   },
   {
@@ -53,6 +55,7 @@ export class HomeComponent implements OnInit {
   }
 
   ]
+
   unSubscribeAll: Subject<any>;
   isOpenAddAccount = false;
   isOpenEditAccount = false;
@@ -66,7 +69,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllAccount();   
+    this.getAllAccount(); 
     this.accountService.requiredRefresh.subscribe(r=>{
       this.getAllAccount()
     })
@@ -80,14 +83,17 @@ export class HomeComponent implements OnInit {
   getAllAccount(): void {
     this.accountService.getAccounts(createParamSearch({
       last_name: this.searchStr,
-      start: 0,
-      limit:800,
+      // start: 0,
+      // limit:25,
+      start: this.pagination.page,
+      limit:this.pagination.size,
     }))
       .pipe(takeUntil(this.unSubscribeAll))
       .subscribe((resp: Account[]) => {
         this.account = resp;
         this.dataSource = new MatTableDataSource(this.account);
         this.dataSource.paginator = this.paginator;
+        
         this.pagination.total = this.account.length;
         
       }, (err: Error) => {
@@ -96,88 +102,46 @@ export class HomeComponent implements OnInit {
       
   }
 
-  // openAddAccount(): void {
-  //   this.isOpenAddAccount = true;
-  // }
-
-  // openEdit(acc: Account): void {
-  //   this.selectedAccount = acc;
-  //   this.isOpenEditAccount = true;
-  // }
-
-  // saveEdit(): void {
-  //   const editedAccount = createAccount({
-  //     balance: parseInt(faker.finance.amount(0, 99999), 0),
-  //     age: 25,
-  //     lastname: faker.name.lastName(),
-  //     firstname: faker.name.lastName(),
-  //     city: this.selectedAccount?.city,
-  //     account_number: this.selectedAccount?.account_number,
-  //     address: this.selectedAccount?.address,
-  //     email: this.selectedAccount?.email,
-  //     employer: this.selectedAccount?.employer,
-  //     gender: 'F',
-  //     state: this.selectedAccount?.state,
-  //     _id: this.selectedAccount?._id
-  //   });
-
-  //   this.accountService.editAccount(editedAccount)
-  //     .pipe(takeUntil(this.unSubscribeAll))
-  //     .subscribe((resp: Account[]) => {
-  //       this.getAllAccount();
-  //       this.isOpenEditAccount = false;
-  //     }, (err: Error) => {
-  //       this.account = [];
-  //     });
-  // }
-
-  // saveNew(): void {
-  //   const newAccount = createAccount({
-  //     balance: parseInt(faker.finance.amount(0, 99999), 0),
-  //     age: 25,
-  //     lastname: faker.name.lastName(),
-  //     firstname: faker.name.lastName(),
-  //     city: faker.address.city(),
-  //     account_number: faker.finance.account(),
-  //     address: faker.address.streetAddress(),
-  //     email: faker.internet.email(),
-  //     employer: faker.name.lastName(),
-  //     gender: 'F',
-  //     state: faker.address.stateAbbr()
-  //   });
-
-  //   this.accountService.addAccount(newAccount)
-  //     .pipe(takeUntil(this.unSubscribeAll))
-  //     .subscribe((resp: Account[]) => {
-  //       this.getAllAccount();
-  //       this.isOpenAddAccount = false;
-  //     }, (err: Error) => {
-  //       this.account = [];
-  //     });
-  // }
-
   search(): void {
     this.getAllAccount();
   }
+
   changePage(e: any){
+    console.log(e);
+    
     this.pagination.page = e.pageIndex;
     this.pagination.size = e.pageSize;
   }
+
   deleteAccount($e: any){
-    alertify.confirm("Remove Account", "Are you sure ?",()=>{
-      this.getAllAccount(); 
-      alertify.success('Delete successfully !'); 
-    },function(){
-
+    this.accountService.deleteAccount($e).subscribe((res) => { 
+      alertify.confirm("Remove Account", "Are you sure ?",()=>{
+        this.getAllAccount(); 
+        alertify.success('Delete successfully !'); 
+      },function(){
+  
+      })
     })
-
+    
   }
 
-  openAddPopup(code:any){
+  editAccount($e:any){
+    this.openDialog($e)
+  }
+
+  openDialog(code:any){
     this.dialog.open(CreateOrEditComponent,{
       width: "50%",
       data:{
         accCode:code
+      }
+    })
+  }
+
+  viewAccount($e:any) {    
+    this.dialog.open(ViewComponent,{
+      data:{
+         vidata:$e
       }
     })
   }

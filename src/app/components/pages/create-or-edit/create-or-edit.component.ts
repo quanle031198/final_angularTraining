@@ -87,7 +87,7 @@ export class CreateOrEditComponent implements OnInit {
     this.ReactiveForm.controls['state'].setValue(this.editData.state);
   }
 
-  SaveAccount() {
+  saveAccount() {
 
     const newAccount = this.ReactiveForm.getRawValue()
     // this.submitted = true;

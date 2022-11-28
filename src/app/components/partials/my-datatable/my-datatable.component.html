@@ -14,8 +14,8 @@
         <td>{{listRow.balance}}</td>
         <td>
          
-          <button (click)="FunctionView(listRow)" class="btn btn-secondary">View</button>
-          <button (click)="FunctionEdit(listRow)" class="btn btn-warning">Edit</button>
+          <button type="button" (click)="openView(listRow)" class="btn btn-secondary">View</button>
+          <button type="button" (click)="functionEdit(listRow)" class="btn btn-warning">Edit</button>
           <button type="button" (click)="deleteAcc(listRow)" class="btn btn-danger">Delete</button>
         </td>
       </tr>
